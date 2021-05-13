@@ -12,6 +12,8 @@ If you are using results generated with our MATLAB codes, please cite the follow
 
 Quan Sun, Yidong Xia, Jordan Klinger, Robert Seifert, Joshua Kane, Vicki Thompson, Qiushi Chen, "X-ray computer tomography-based porosity analysis: Algorithms and application for porous woody biomass." *Powder Technology*, 2021. [https://doi.org/10.1016/j.powtec.2021.05.006](https://doi.org/10.1016/j.powtec.2021.05.006)
 
+## Coode maintenance
+This repository contains the code at the time of publication. Active maintenance, including addition of new features, is available on INL's Github repository: [https://github.com/idaholab/LIGGGHTS-INL/tree/inl/tools/PorosityAnalysis3D](https://github.com/idaholab/LIGGGHTS-INL/tree/inl/tools/PorosityAnalysis3D) 
 
 ## Instructions for the MATLAB codes
 
