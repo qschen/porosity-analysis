@@ -1,12 +1,32 @@
-clear;clc;close all
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% MATLAB CODES ACCOMPANYING QUAN ET AL. (2021) PAPER
+% CODES CALCULATE POROSITY ON PROCESSED X-RAY CT IMAGES
+% 
+% STEP5: PLOT LOCAL POROSITY
+% REFER TO README.MD FOR COMPLETE INSTRUCTION
+%
+% CITE AND CREDIT:
+% SUN ET AL. (2021). POWDER TECHNOLOGY, 388:496-504.
+% HTTPS://DOI.ORG/10.1016/J.POWTEC.2021.05.006
+% 
+% TESTED ON MATLAB VERSION 2018(a) OR NEWER
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+clc; clear; close all;
+
 addpath(genpath('BW_figures'));
 
-% type = 'Loose';
-% type = 'Dense';
-% type = 'Steel';
-type = 'Sub_Steel';
-n=5; % Kernel size
-kernels = num2str(n);  %% select kernel size
+%% user input
+
+n = 5;% kernel size (L_e by voxel), must be identical with Step 3!!
+
+% read the 3D binary matrix
+
+% type = 'Loose'; for example 1
+type = 'Steel'; % for example 2
+%%
+
+kernels = num2str(n);
 filename = [type '_porosity_' kernels,'.mat'];
 load(filename);
 
@@ -34,6 +54,7 @@ zslice = [ZI];
 fontsize = 16;
 
 % Select colormap
+
 map = [flipud(jet)];
 % map = [parula];
 % map = [hsv];
@@ -138,6 +159,4 @@ c = colorbar('FontSize', 16);
 c.Label.String = 'Porosity';
 axis image
 axis off
-% pos = get(f,'Position');
-% set(f,'PaperPositionMode','Auto','PaperUnits','Inches','PaperSize',[pos(3), pos(4)])
 

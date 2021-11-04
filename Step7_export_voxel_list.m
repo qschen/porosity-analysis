@@ -1,9 +1,28 @@
-clear;clc;
-close all;
-% read the 3D binary matrix
-type = 'Sub_Steel';
-% type = 'Loose';
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% MATLAB CODES ACCOMPANYING QUAN ET AL. (2021) PAPER
+% CODES CALCULATE POROSITY ON PROCESSED X-RAY CT IMAGES
+% 
+% STEP7: EXPORT VOXEL LIST
+% REFER TO README.MD FOR INSTRUCTION
+%
+% CITE AND CREDIT:
+% SUN ET AL. (2021). POWDER TECHNOLOGY, 388:496-504.
+% HTTPS://DOI.ORG/10.1016/J.POWTEC.2021.05.006
+% 
+% TESTED ON MATLAB VERSION 2018(a) OR NEWER
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+clc; clear; close all;
+
+%% user input
+
+% read the 3D binary matrix
+
+% type = 'Loose'; for example 1
+type = 'Steel'; % for example 2
+
+
+%%
 load([type,'_packing.mat']);
 sz = size(BW);
 

@@ -1,12 +1,29 @@
-clear;clc;
-close all;
-% read and prepare the data 
-n=5;% kernel size (L_e by voxel)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% MATLAB CODES ACCOMPANYING QUAN ET AL. (2021) PAPER
+% CODES CALCULATE POROSITY ON PROCESSED X-RAY CT IMAGES
+% 
+% STEP4: CALCULATE DIRECTIONAL POROSITY
+% REFER TO README.MD FOR INSTRUCTION
+%
+% CITE AND CREDIT:
+% SUN ET AL. (2021). POWDER TECHNOLOGY, 388:496-504.
+% HTTPS://DOI.ORG/10.1016/J.POWTEC.2021.05.006
+% 
+% TESTED ON MATLAB VERSION 2018(a) OR NEWER
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% type = 'Loose';
-% type = 'Dense';
-% type = 'Steel';
-type = 'Sub_Steel';
+clc; clear; close all;
+
+%% user input
+% read and prepare the data 
+
+n = 5;% kernel size (L_e by voxel), must be identical with Step 3!!
+
+% read the 3D binary matrix
+
+% type = 'Loose'; for example 1
+type = 'Steel'; % for example 2
+%%
 load([type,'_porosity_',num2str(n),'.mat']);
 load([type,'_packing.mat']);
 
@@ -49,7 +66,7 @@ end
 
 %% Envelop porosity calculation
 % bounding box 
-Env_porosity =1 - sum(BW,'all')/(sz(1)*sz(2)*sz(3));
+Env_porosity =1 - nnz(BW)/(sz(1)*sz(2)*sz(3));
 
 % Env_porosity_theo =1- ((4/3*pi*(50)^3*64)/(400^3)); % Theoretical env_prosity of loose packing
 

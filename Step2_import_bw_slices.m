@@ -1,8 +1,25 @@
-clc;
-clear;
-close all
-dbstop  if error
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% MATLAB CODES ACCOMPANYING QUAN ET AL. (2021) PAPER
+% CODES CALCULATE POROSITY ON PROCESSED X-RAY CT IMAGES
+% 
+% STEP2: IMPORT BLACK/WHITE IMAGES 
+% REFER TO README.MD FOR INSTRUCTION
+%
+% CITE AND CREDIT:
+% SUN ET AL. (2021). POWDER TECHNOLOGY, 388:496-504.
+% HTTPS://DOI.ORG/10.1016/J.POWTEC.2021.05.006
+% 
+% TESTED ON MATLAB VERSION 2018(a) OR NEWER
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+clc; clear; close all;
+%dbstop  if error
+
+%% Enter the ouput 3D binary .mat file name
+% output_filename = 'Loose'; % for example 1
+output_filename = ['Steel']; % for example 2
+
+%%
 [fileName, pathName, ~] =...
     uigetfile(...
     {'*.jpg;*.tif;*.tiff;*.png;*.gif;*.bmp;','All Image Files'},...
@@ -47,26 +64,26 @@ Serial-reading of images to assign values in BW3D matrix
         BW3D(:,:,iFile) = imread( [pathName fileName(iFile,:)] );
     end
     %
+BW = BW3D;
     
-    
-    BW = BW3D;
     %{ 
-     Optional: binarize the image to logical format and crop the margin (if the image is not logical type)
+     Binarize the image to logical format  (if the image is not logical type) and crop the margin
     %}
-    BW = imbinarize(BW3D);
+if ~isa(BW,'logical')
+    BW = imbinarize(BW3D); 
+end
     stats = regionprops3(BW,'Image','BoundingBox');
     BW=stats.Image{1,1};
+    %%
+%{
+    save the 3D binary matrix  (Select the file name!)
+   
+%}
+    save ([output_filename,'_packing.mat'],'BW');  % 
 
 %{
-    save the 3D binary matrix
-%}
-    save ('Steel_packing.mat','BW');
-%     save ('Loose_packing.mat','BW');
-%     save ('Dense_packing.mat','BW');
-    %{
-  Visualize your packing by z-slices
-    
+    Visualize your packing by z-slices 
    Thanks to Maysam Shahedi for the visualization function.
    (https://www.mathworks.com/matlabcentral/fileexchange/41334-imshow3d)
-    %}
+%}
 imshow3Dfull(BW)
